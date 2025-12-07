@@ -119,3 +119,348 @@
             border-radius: 10px;
             text-align: center;
             box-shadow: 0 0 20px rgba(0,0,0,0.5);
+        }
+
+        .auth-box input {
+            width: 90%;
+            padding: 10px;
+            margin: 10px 0;
+            border-radius: 5px;
+            border: none;
+            background: #334155;
+            color: white;
+        }
+
+        .btn-main {
+            width: 100%;
+            padding: 12px;
+            background: #fbbf24;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
+            font-weight: bold;
+            color: #0f172a;
+            margin-top: 15px;
+            transition: background 0.3s;
+        }
+
+        .btn-main:hover { background: #facc15; }
+
+        .toggle-link {
+            cursor: pointer;
+            margin-top: 15px;
+            font-size: 14px;
+            color: #94a3b8;
+        }
+        .toggle-link:hover { text-decoration: underline; color: #fbbf24; }
+
+        .role-selector {
+            display: flex;
+            margin-bottom: 20px;
+            background: #334155;
+            border-radius: 5px;
+            overflow: hidden;
+        }
+        .role-selector button {
+            flex: 1;
+            padding: 10px;
+            border: none;
+            background: transparent;
+            color: white;
+            cursor: pointer;
+            transition: background 0.3s;
+        }
+        .role-selector .active-role {
+            background: #fbbf24;
+            color: #0f172a;
+            font-weight: bold;
+        }
+
+        .professional-dashboard {
+            max-width: 800px;
+            margin: 30px auto;
+            background: #1e293b;
+            padding: 30px;
+            border-radius: 10px;
+        }
+
+        .profile-header {
+            display: flex;
+            align-items: center;
+            gap: 20px;
+            border-bottom: 1px solid #334155;
+            padding-bottom: 20px;
+            margin-bottom: 20px;
+        }
+
+        #pro-profile-pic {
+            width: 100px;
+            height: 100px;
+            border-radius: 50%;
+            object-fit: cover;
+            border: 3px solid #fbbf24;
+        }
+
+        .profile-info input {
+            display: block;
+            width: 100%;
+            padding: 8px;
+            margin: 5px 0;
+            border-radius: 5px;
+            border: 1px solid #334155;
+            background: #0f172a;
+            color: white;
+            font-size: 16px;
+        }
+
+        .profile-info button {
+            background: #4ade80;
+            color: #0f172a;
+            margin-top: 10px;
+        }
+
+        .upload-btn {
+            background: #fbbf24;
+            color: #0f172a;
+            padding: 8px 15px;
+            border-radius: 5px;
+            cursor: pointer;
+            display: inline-block;
+            margin-top: 10px;
+            font-weight: bold;
+        }
+
+        .portfolio-gallery {
+            display: flex;
+            gap: 10px;
+            overflow-x: auto;
+            padding: 10px 0;
+            border-bottom: 1px solid #334155;
+            margin-bottom: 20px;
+        }
+
+        .portfolio-gallery img {
+            width: 150px;
+            height: 150px;
+            object-fit: cover;
+            border-radius: 5px;
+        }
+
+        .chat-item, .network-section {
+            background: #0f172a;
+            padding: 15px;
+            border-radius: 5px;
+            margin-bottom: 10px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <div class="logo"><img src="logo-profinder.png" alt="Logo ProFinder">ProFinder</div>
+        <div class="nav-links">
+            <a href="#" onclick="showSection('home')">Home</a>
+            <a href="#" onclick="showSection('auth')">Login / Cadastro</a>
+            <a href="#" id="dashboard-link" style="display: none;" onclick="showSection('professional-dashboard')">Meu Painel</a>
+        </div>
+    </nav>
+
+    <section id="home" class="section active">
+        <div class="hero">
+            <input type="text" placeholder="Buscar profissionais...">
+            <h2>Profissionais disponíveis</h2>
+        </div>
+        <div class="cards-container">
+            <div class="card">
+                <img src="leo-1.jpg" alt="Léo Nails">
+                <h3>Léo Nails</h3>
+                <p>Manicure & Pedicure</p>
+                <span>⭐ 4.9 (150)</span>
+                <button onclick="agendar()">Agendar</button>
+                <button onclick="avaliar()">Avaliar</button>
+            </div>
+            <div class="card">
+                <img src="ana-1.jpg" alt="Ana Hair">
+                <h3>Ana Hair</h3>
+                <p>Cabeleireira</p>
+                <span>⭐ 4.8 (210)</span>
+                <button onclick="agendar()">Agendar</button>
+                <button onclick="avaliar()">Avaliar</button>
+            </div>
+            <div class="card">
+                <img src="bea-1.jpg" alt="Bella Estética">
+                <h3>Bella Estética</h3>
+                <p>Esteticista Facial</p>
+                <span>⭐ 4.7 (95)</span>
+                <button onclick="agendar()">Agendar</button>
+                <button onclick="avaliar()">Avaliar</button>
+            </div>
+            <div class="card">
+                <img src="carlos-1.jpg" alt="Corte Nobre">
+                <h3>Corte Nobre</h3>
+                <p>Barbeiro Profissional</p>
+                <span>⭐ 5.0 (305)</span>
+                <button onclick="agendar()">Agendar</button>
+                <button onclick="avaliar()">Avaliar</button>
+            </div>
+        </div>
+    </section>
+
+    <section id="auth" class="section">
+        <div class="auth-box">
+            <h2 id="auth-title">Login</h2>
+            <div class="role-selector">
+                <button id="btn-client" class="active-role" onclick="setRole('client')">Sou Cliente</button>
+                <button id="btn-pro" onclick="setRole('professional')">Sou Profissional</button>
+            </div>
+            
+            <input type="email" id="email" placeholder="E-mail" required>
+            <input type="password" id="password" placeholder="Senha" required>
+            
+            <button class="btn-main" onclick="acaoPrincipal()">Entrar</button>
+            <p class="toggle-link" onclick="toggleAuth()">Não tem conta? Cadastre-se</p>
+        </div>
+    </section>
+
+    <section id="professional-dashboard" class="section professional-dashboard">
+        <h2>Meu Painel ProFinder</h2>
+        
+        <div class="profile-header">
+            <img src="ana-hair.png" id="pro-profile-pic" alt="Foto de Perfil">
+            <div class="profile-info">
+                <input type="text" value="Ana Hair" id="pro-name">
+                <input type="text" value="Cabeleireira" id="pro-category">
+                <p>Avaliação: ⭐ 4.8</p>
+                <label for="profile-upload" class="upload-btn">Alterar Foto de Perfil</label>
+                <input type="file" id="profile-upload" style="display: none;" onchange="alert('Simulação: Foto de perfil alterada!')">
+                <button onclick="salvarPerfil()">Salvar Alterações</button>
+            </div>
+        </div>
+
+        <div class="portfolio-section">
+            <h3>Meu Portfólio (Galeria)</h3>
+            <div class="portfolio-gallery">
+                <img src="ana-2.jpg" alt="Portfolio 1">
+                <img src="carlos-2.jpg" alt="Portfolio 2">
+                <img src="leo-2.jpg" alt="Portfolio 3">
+            </div>
+            <label for="portfolio-upload" class="upload-btn">Adicionar Fotos ao Portfólio</label>
+            <input type="file" id="portfolio-upload" style="display: none;" multiple onchange="alert('Simulação: Fotos adicionadas ao portfólio!')">
+        </div>
+
+        <div class="chat-section">
+            <h3>Chat Exclusivo com Clientes</h3>
+            <div class="chat-list">
+                <div class="chat-item">
+                    <span>Cliente: João Silva</span>
+                    <button onclick="alert('Simulação: Abrindo chat com João.')">Abrir Chat</button>
+                </div>
+                <div class="chat-item">
+                    <span>Cliente: Maria Santos</span>
+                    <button onclick="alert('Simulação: Abrindo chat com Maria.')">Abrir Chat</button>
+                </div>
+            </div>
+        </div>
+        
+        <div class="network-section">
+            <h3>Profissionais da Sua Área</h3>
+            <p>Networking: Você pode ver Luiza Nails e Bella Estética em sua área.</p>
+        </div>
+    </section>
+
+    <script>
+        // Variáveis de Estado Globais
+        let isLogin = true; 
+        let userRole = 'client'; 
+        let profissionalLogado = {
+            nome: "Novo Profissional",
+            categoria: "Serviço Editável (Ex: Cabeleireira)",
+            foto: "ana-hair.png" 
+        };
+
+        // FUNÇÃO DE MOSTRAR SEÇÃO
+        function showSection(id) {
+            document.querySelectorAll('.section').forEach(s => s.classList.remove('active'));
+            document.getElementById(id).classList.add('active');
+            
+            if (id === 'professional-dashboard') {
+                document.getElementById('pro-name').value = profissionalLogado.nome;
+                document.getElementById('pro-category').value = profissionalLogado.categoria;
+                document.getElementById('pro-profile-pic').src = profissionalLogado.foto;
+                document.getElementById('dashboard-link').style.display = 'block';
+            } else {
+                document.getElementById('dashboard-link').style.display = 'none';
+            }
+        }
+
+        // FUNÇÃO PARA ALTERNAR ENTRE LOGIN E CADASTRO (CORRIGIDA)
+        function toggleAuth() {
+            isLogin = !isLogin; 
+            
+            const title = document.getElementById('auth-title');
+            const btn = document.querySelector('.btn-main');
+            const p = document.querySelector('.toggle-link');
+
+            if (isLogin) {
+                title.innerText = "Login";
+                btn.innerText = "Entrar";
+                p.innerText = "Não tem conta? Cadastre-se";
+            } else {
+                title.innerText = "Cadastro";
+                btn.innerText = "Criar Conta";
+                p.innerText = "Já tem conta? Faça Login";
+            }
+        }
+
+        // FUNÇÃO PARA SELECIONAR O TIPO DE USUÁRIO
+        function setRole(role) {
+            userRole = role;
+            document.getElementById('btn-client').classList.remove('active-role');
+            document.getElementById('btn-pro').classList.remove('active-role');
+            document.getElementById('btn-' + role).classList.add('active-role');
+        }
+
+        // FUNÇÃO PRINCIPAL QUE SIMULA O LOGIN/CADASTRO
+        function acaoPrincipal() {
+            const email = document.getElementById('email').value;
+            const password = document.getElementById('password').value;
+            
+            if (email === "" || password === "") {
+                alert("Por favor, preencha E-mail e Senha!");
+                return;
+            }
+
+            if (isLogin) {
+                alert(`Login (${userRole.toUpperCase()}) realizado com sucesso!`);
+            } else {
+                alert(`Cadastro (${userRole.toUpperCase()}) realizado com sucesso!`);
+            }
+
+            if (userRole === 'client') {
+                showSection('home');
+            } else {
+                profissionalLogado.nome = email.split('@')[0].toUpperCase().replace('.', ' ') || "Meu Nome Profissional"; 
+                showSection('professional-dashboard');
+            }
+        }
+
+        // FUNÇÕES DE SIMULAÇÃO
+        function agendar() {
+            alert("Simulação de Agendamento: Escolha a data e hora!");
+        }
+
+        function avaliar() {
+            alert("Simulação de Avaliação: Dê suas estrelas e envie um comentário!");
+        }
+
+        function salvarPerfil() {
+            profissionalLogado.nome = document.getElementById('pro-name').value;
+            profissionalLogado.categoria = document.getElementById('pro-category').value;
+
+            alert(`Simulação: Perfil salvo!\nNome: ${profissionalLogado.nome}\nCategoria: ${profissionalLogado.categoria}`);
+        }
+    </script>
+</body>
+</html>
